@@ -26,28 +26,28 @@ The command-line flags for MALM are as follows:
 ## Example Output
 The following is a recording when running a live malware sample that allocates executable heaps in the existing svchost.exe process, and copies itself into it. The final report was triggered by a CTRL-C keyboard command. Take appropriate precautions when handling computer viruses - this tool simply monitors the system and does not prevent infection.
 
-'''PID 690,7.exe: New process.
-PID 690,7.exe: No longer accessible from current process security token.
-PID 690,7.exe: Terminated.
-PID 3DC,svchost.exe: New executable heap at 0x7A0000
-PID 3DC,svchost.exe: New executable heap at 0x7A1000
-PID 3DC,svchost.exe: New executable heap at 0x7A3000
-PID 3DC,svchost.exe: New executable heap at 0x7A6000
-PID 3DC,svchost.exe: New executable heap at 0x7A8000
-PID 3DC,svchost.exe: New executable heap at 0x7B2000
-PID 3DC,svchost.exe: New executable heap at 0x7B3000
-PID 3DC,svchost.exe: New executable heap at 0x7B6000
-
-Final report of final state versus starting state.
---- PID 3DC,svchost.exe ---
-new exec heap: 7A0000
-new exec heap: 7A1000
-new exec heap: 7A3000
-new exec heap: 7A6000
-new exec heap: 7A8000
-new exec heap: 7B2000
-new exec heap: 7B3000
-new exec heap: 7B6000'''
+	PID 690,7.exe: New process.
+	PID 690,7.exe: No longer accessible from current process security token.
+	PID 690,7.exe: Terminated.
+	PID 3DC,svchost.exe: New executable heap at 0x7A0000
+	PID 3DC,svchost.exe: New executable heap at 0x7A1000
+	PID 3DC,svchost.exe: New executable heap at 0x7A3000
+	PID 3DC,svchost.exe: New executable heap at 0x7A6000
+	PID 3DC,svchost.exe: New executable heap at 0x7A8000
+	PID 3DC,svchost.exe: New executable heap at 0x7B2000
+	PID 3DC,svchost.exe: New executable heap at 0x7B3000
+	PID 3DC,svchost.exe: New executable heap at 0x7B6000
+	
+	Final report of final state versus starting state.
+	--- PID 3DC,svchost.exe ---
+	new exec heap: 7A0000
+	new exec heap: 7A1000
+	new exec heap: 7A3000
+	new exec heap: 7A6000
+	new exec heap: 7A8000
+	new exec heap: 7B2000
+	new exec heap: 7B3000
+	new exec heap: 7B6000
 
 
 ## Contributing
