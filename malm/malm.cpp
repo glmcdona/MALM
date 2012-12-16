@@ -83,7 +83,7 @@ bool getMaximumPrivileges(HANDLE h_Process)
 void printFinalReport()
 {
 	// We need to print the final report on the changes
-	printf("\n\nFinal report of final state versus starting state.\n");
+	printf("\n\nFinal report of final state versus starting state:\n");
 
 	// Take a new snapshot
 	i_system* currentSnapshot = new i_system(true);
@@ -115,14 +115,14 @@ int _tmain(int argc, _TCHAR* argv[])
 	setbuf(stdout, NULL);
 
 	// Print the intro
-	printf("MALM v1.1 Flags\n\
+	printf("MALM v1.2 Flags\n\
    -q: quick mode. Only generates final report.\n\
    -t [seconds]: Quit and generate final report after the specified number of seconds.\n\n\
    \
-Welcome to malm v1.1: malware monitor\n\
+Welcome to malm v1.2: malware monitor\n\
 \tby Geoff McDonald\n\
 \thttp://www.split-code.com/\n\n\
-This is a Windows x86 and x64 compatible tool that records new processes, new modules loaded by existing processes, and new executable heaps in existing processes. Run this prior to running the malware sample. malm will log changes it has found, and upon closing (CTRL-C) this tool will print a final report of the state change from the beginning to the end. This tool is quite useful for figuring out where malware is residing after execution. This tool is based upon snapshots, so it can miss processes, modules, or heaps that exist for only a short period of time.\n\n");
+This is a Windows x86 and x64 compatible tool that records new processes, new modules loaded by existing processes, and new executable heaps in existing processes. Run this prior to running the malware sample. malm will log changes it has found, and upon closing (CTRL-C) this tool will print a final report of the state change from the beginning to the end. This tool is quite useful for monitoring where malware is residing after execution. This tool is based upon snapshots, so it can miss processes, modules, or heaps that exist for only a short period of time.\n\n");
 
 	// Read in the command-line arguments
 	int numSeconds = 0;
