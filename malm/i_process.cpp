@@ -35,11 +35,11 @@ void i_process::printIncrementalReport(i_process* oldProcessSnapshot)
 			// Print this executable heap if it changed
 			if( changedOrNew )
 			{
-				printf("PID %X,%S: Loaded module %S at 0x%X\n",
+				printf("PID %X,%S: Loaded module %S at 0xllX\n",
 					this->processDetails.th32ProcessID,
 					this->processDetails.szExeFile,
 					this->modules[i]->moduleDetails.szModule,
-					this->modules[i]->moduleDetails.hModule );
+					(unsigned long long int) this->modules[i]->moduleDetails.hModule );
 			}
 		}
 
@@ -84,10 +84,10 @@ void i_process::printIncrementalReport(i_process* oldProcessSnapshot)
 			// Print this executable heap if it changed
 			if( changedOrNew )
 			{
-				printf("PID %X,%S: New executable heap at 0x%X\n",
+				printf("PID %X,%S: New executable heap at 0x%llX\n",
 					this->processDetails.th32ProcessID,
 					this->processDetails.szExeFile,
-					this->heaps[i]->heapDetails.BaseAddress );
+					(unsigned long long int) this->heaps[i]->heapDetails.BaseAddress );
 			}
 		}
 	}else{
@@ -134,7 +134,9 @@ void i_process::printFinalReport(i_process* oldProcessSnapshot)
 			if( changedOrNew )
 			{
 				if( strlen( changedString ) < 0x2000 )
-					sprintf( changedString, "%sloaded module %S at %X\n", changedString, this->modules[i]->moduleDetails.szModule, this->modules[i]->moduleDetails.hModule);
+					sprintf( changedString, "%sloaded module %S at %llX\n", changedString,
+					this->modules[i]->moduleDetails.szModule,
+					(unsigned long long int) this->modules[i]->moduleDetails.hModule);
 			}
 		}
 
@@ -158,7 +160,8 @@ void i_process::printFinalReport(i_process* oldProcessSnapshot)
 			if( changedOrNew )
 			{
 				if( strlen( changedString ) < 0x2000 )
-					sprintf( changedString, "%snew exec heap: %X\n", changedString, this->heaps[i]->heapDetails.BaseAddress);
+					sprintf( changedString, "%snew exec heap: %llX\n", changedString,
+					(unsigned long long int) this->heaps[i]->heapDetails.BaseAddress);
 			}
 		}
 
@@ -243,13 +246,7 @@ void i_process::generateHeapList(HANDLE ph)
 {
 	// Set the max address of the target process
 	__int64 maxAddress = 0;
-	if( IsWin64(ph) )
-	{
-		maxAddress = 0x7fffffffffffffff;
-	}else
-	{
-		maxAddress = 0x7fffffff;
-	}
+	maxAddress = 0x7ffffffffff; // Not a problem for 32bit targets
 
     // Walk the process heaps
     __int64 address = 0;
@@ -265,7 +262,8 @@ void i_process::generateHeapList(HANDLE ph)
 		address = newAddress;
 
         // Add this heap information
-		if( (mbi.AllocationProtect & (PAGE_EXECUTE | PAGE_EXECUTE_READ | PAGE_EXECUTE_READWRITE | PAGE_EXECUTE_WRITECOPY)) )
+		if( (mbi.Protect & (PAGE_EXECUTE | PAGE_EXECUTE_READ | PAGE_EXECUTE_READWRITE | PAGE_EXECUTE_WRITECOPY))
+			&& !(mbi.Protect & (PAGE_NOACCESS | PAGE_GUARD)) )
 			heaps.Add(new i_heap(mbi));
     }
 }
