@@ -52,10 +52,10 @@ The following is a recording when running a live malware sample that allocates e
 
 ## Contributing
 Contributions are welcome. Some possible contribution directions are as follows:
-1. Upgrade the i_module comparer to return 'False' when the code at the module entry point has changed, or if the PE header has changed. Some malware gut out existing modules in memory and replace the code with their malware. In this scenario, this tool may not register the hidden location of the malware within the legitimate previously-loaded module.
-2. Kernel address-space executable region monitoring.
-3. Maybe add filesystem and registry change monitoring with a flag.
-4. Anything else you can think of.
+* Upgrade the i_module comparer to return 'False' when the code at the module entry point has changed, or if the PE header has changed. Some malware gut out existing modules in memory and replace the code with their malware. In this scenario, this tool may not register the hidden location of the malware within the legitimate previously-loaded module.
+* Kernel address-space executable region monitoring.
+* Maybe add filesystem and registry change monitoring with a flag.
+* Anything else you can think of.
 
 
 ## License
