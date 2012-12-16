@@ -35,7 +35,7 @@ void i_process::printIncrementalReport(i_process* oldProcessSnapshot)
 			// Print this executable heap if it changed
 			if( changedOrNew )
 			{
-				printf("PID %X,%S: Loaded module %S at 0xllX\n",
+				printf("PID %X,%S: Loaded module %S at 0x%llX\n",
 					this->processDetails.th32ProcessID,
 					this->processDetails.szExeFile,
 					this->modules[i]->moduleDetails.szModule,

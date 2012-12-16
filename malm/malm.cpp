@@ -111,6 +111,10 @@ BOOL WINAPI ConsoleHandler(DWORD CEvent)
 
 int _tmain(int argc, _TCHAR* argv[])
 {
+	// Disable buffering
+	setbuf(stdout, NULL);
+
+	// Print the intro
 	printf("MALM v1.1 Flags\n\
    -q: quick mode. Only generates final report.\n\
    -t [seconds]: Quit and generate final report after the specified number of seconds.\n\n\
@@ -121,7 +125,7 @@ Welcome to malm v1.1: malware monitor\n\
 This is a Windows x86 and x64 compatible tool that records new processes, new modules loaded by existing processes, and new executable heaps in existing processes. Run this prior to running the malware sample. malm will log changes it has found, and upon closing (CTRL-C) this tool will print a final report of the state change from the beginning to the end. This tool is quite useful for figuring out where malware is residing after execution. This tool is based upon snapshots, so it can miss processes, modules, or heaps that exist for only a short period of time.\n\n");
 
 	// Read in the command-line arguments
-	int numSeconds = -1;
+	int numSeconds = 0;
 	bool quickMode = false;
 	for( int i = 0; i < argc; i++ )
 	{
@@ -130,7 +134,7 @@ This is a Windows x86 and x64 compatible tool that records new processes, new mo
 		if( wcscmp(argv[i],L"-t") == 0 && i < argc - 1 )
 		{
 			// Parse the number of seconds to quit after
-			numSeconds = _wtoi(argv[i+1]);
+			numSeconds = _wtoi(argv[i+1]); // Returns 0 if it cannot parse it. No problem here.
 		}
 	}
 	if( quickMode )
