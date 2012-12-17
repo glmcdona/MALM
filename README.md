@@ -2,7 +2,7 @@
 MALM is a Windows x86 and x64 compatible tool that records new processes, new modules loaded by existing processes, and new executable heaps in existing processes. Run this prior to running the malware sample. malm will log changes it has found, and upon closing (CTRL-C) this tool will print a final report of the state change from the beginning to the end. This tool is quite useful for monitoring where malware resides after execution. This tool is based upon snapshots,so it can miss processes, modules, or heaps that exist for only a short period of time.
 
 I am maintaining a public binary release download page for this project at:
-  http://split-code.com/index.php/malm-malware-monitor
+  http://split-code.com/malm-malware-monitor.html
 
 
 ## Flags
